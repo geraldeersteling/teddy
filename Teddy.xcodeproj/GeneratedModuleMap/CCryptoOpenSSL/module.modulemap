@@ -1,0 +1,4 @@
+module CCryptoOpenSSL {
+    umbrella "/Users/geraldeersteling/GITHUB/teddy/.build/checkouts/crypto/Sources/CCryptoOpenSSL/include"
+    export *
+}
