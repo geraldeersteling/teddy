@@ -5,18 +5,14 @@ import SlackKit
 public func routes(_ router: Router) throws {
     // Basic "It works" example
     router.get { req -> String in
+        Teddy.shared.setup()
 
-        guard let token = Environment.get("SLACK_TOKEN")
-        else { fatalError("No Slack token found!") }
-
-        let _ = Threddy(token: token)
-
-        return "Treddy started?"
+        return "Teddy started!"
     }
     
     // Basic "Hello, world!" example
-    router.get("hello") { req in
-        return "Hello, world!"
+    router.get("stop") { req in
+        return "Teddy stopped!"
     }
 
     // Example of configuring a controller
@@ -27,12 +23,20 @@ public func routes(_ router: Router) throws {
 }
 
 
-class Threddy {
-
+class Teddy {
+    static let shared = Teddy()
     let bot: SlackKit
+    private let didSetup = false
 
-    init(token: String) {
+    private init() {
         bot = SlackKit()
+
+    }
+
+    func setup() {
+        guard let token = Environment.get("SLACK_TOKEN")
+        else { fatalError("No Slack token found!") }
+
         bot.addRTMBotWithAPIToken(token)
         bot.addWebAPIAccessWithToken(token)
         bot.notificationForEvent(.message) { (event, connection) in
@@ -44,7 +48,10 @@ class Threddy {
 
             self.handleMessage(msg)
         }
+    }
 
+    func stop() {
+        bot.rtm?.disconnect()
     }
 
     private func handleMessage(_ message: Message) {
