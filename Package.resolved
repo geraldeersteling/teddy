@@ -42,8 +42,8 @@
         "repositoryURL": "https://github.com/vapor/fluent.git",
         "state": {
           "branch": null,
-          "revision": "b915c321c6f9e83743ee5efa35a30895e1b02e51",
-          "version": "3.2.0"
+          "revision": "783819d8838d15e1a05b459aa0fd1bde1e37ac26",
+          "version": "3.2.1"
         }
       },
       {
@@ -69,8 +69,8 @@
         "repositoryURL": "https://github.com/vapor/multipart.git",
         "state": {
           "branch": null,
-          "revision": "f919a01c4d10a281d6236a21b0b1d1759a72b8eb",
-          "version": "3.0.4"
+          "revision": "f063180d0b84832accd33194e06ed3c41f8609ac",
+          "version": "3.1.1"
         }
       },
       {
@@ -92,6 +92,15 @@
         }
       },
       {
+        "package": "SlackKit",
+        "repositoryURL": "https://github.com/pvzig/SlackKit.git",
+        "state": {
+          "branch": null,
+          "revision": "98dbad9ac75ad9662fbed782540ac0a2442213a3",
+          "version": "4.5.0"
+        }
+      },
+      {
         "package": "SQL",
         "repositoryURL": "https://github.com/vapor/sql.git",
         "state": {
@@ -107,6 +116,15 @@
           "branch": null,
           "revision": "314d9cd21165bcf14215e336a23ff8214f40e411",
           "version": "3.2.1"
+        }
+      },
+      {
+        "package": "Starscream",
+        "repositoryURL": "https://github.com/daltoniam/Starscream",
+        "state": {
+          "branch": null,
+          "revision": "e6b65c6d9077ea48b4a7bdda8994a1d3c6969c8d",
+          "version": "3.1.1"
         }
       },
       {
@@ -146,6 +164,15 @@
         }
       },
       {
+        "package": "Swifter",
+        "repositoryURL": "https://github.com/httpswift/swifter.git",
+        "state": {
+          "branch": null,
+          "revision": "8b5afb48ae64d4f729f0489ddcfe09c62b9c3687",
+          "version": "1.4.7"
+        }
+      },
+      {
         "package": "TemplateKit",
         "repositoryURL": "https://github.com/vapor/template-kit.git",
         "state": {
@@ -179,15 +206,6 @@
           "branch": null,
           "revision": "92a58a9a84e4330500b99fe355a94d29f67abe58",
           "version": "3.3.1"
-        }
-      },
-      {
-        "package": "WebSocket",
-        "repositoryURL": "https://github.com/vapor/websocket.git",
-        "state": {
-          "branch": null,
-          "revision": "d85e5b6dce4d04065865f77385fc3324f98178f6",
-          "version": "1.1.2"
         }
       }
     ]
