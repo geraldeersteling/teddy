@@ -26,12 +26,18 @@ class Teddy {
 
     static let shared = Teddy()
     private let bot: SlackKit
+    private var didSetup = false
 
     private init() {
         bot = SlackKit()
     }
 
     func setup() {
+        guard !didSetup
+        else { return }
+        
+        didSetup = true
+
         guard let token = Environment.get("SLACK_BOT_TOKEN")
         else { fatalError("No Slack bot token found!") }
 
