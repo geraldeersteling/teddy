@@ -19,7 +19,7 @@ class Teddy {
                 case .Teddy:
                     return "BPW80F6M7"
                 case .Morad:
-                    return "BQATV5Z8F"
+                    return "BPF2CGQPP"
             }
         }
     }
