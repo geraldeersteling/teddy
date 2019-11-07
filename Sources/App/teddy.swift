@@ -26,18 +26,17 @@ class Teddy {
 
     static let shared = Teddy()
     private let bot: SlackKit
-    private var didSetup = false
+    private var userHelper: ThreddyUserHelper
 
     private init() {
         bot = SlackKit()
+
+        guard let user_token = Environment.get("SLACK_USER_TOKEN")
+        else { fatalError("No Slack user token found!") }
+        userHelper = ThreddyUserHelper(token: user_token)
     }
 
     func setup() {
-        guard !didSetup
-        else { return }
-        
-        didSetup = true
-
         guard let token = Environment.get("SLACK_BOT_TOKEN")
         else { fatalError("No Slack bot token found!") }
 
@@ -97,17 +96,19 @@ class Teddy {
 
                 """
 
+                self.userHelper.delete(message: message)
+
                 bot.webAPI?.sendEphemeral(channel: originalChannel,
                                           text: text,
                                           user: user,
-                                          success: { _ in self.delete(message: message) },
+                                          success: { _ in },
                                           failure: { error in print("what now...\(error)") })
             }
             return
         }
 
         let text = """
-        Thread locked, fire away!
+        Please continue answering in this thread.
         """
         sendText(text, usingMessage: message, asThread: true)
     }
@@ -133,28 +134,26 @@ class Teddy {
                 }
         })
     }
+}
 
-    private func delete(message: Message) {
+class ThreddyUserHelper {
+
+    let bot: SlackKit
+
+    init(token: String) {
+        bot = SlackKit()
+        bot.addWebAPIAccessWithToken(token)
+    }
+
+    fileprivate func delete(message: Message) {
         guard
             let timestamp = message.ts,
             let channel = message.channel
         else { return }
 
-        // Temporary use the OAuth user token instead to delete the message
-        guard let user_token = Environment.get("SLACK_USER_TOKEN")
-        else { fatalError("No Slack user token found!") }
-
-        bot.addWebAPIAccessWithToken(user_token)
         bot.webAPI?.deleteMessage(channel: channel,
                                   ts: timestamp,
                                   success: nil,
                                   failure: { error in print("de fuk: \(error)")})
-
-        // Then revert to the Bot token afterwards
-        guard let bot_token = Environment.get("SLACK_BOT_TOKEN")
-        else { fatalError("No Slack bot token found!") }
-        bot.addWebAPIAccessWithToken(bot_token)
     }
-
 }
-
